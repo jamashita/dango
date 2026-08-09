@@ -11,6 +11,10 @@
 
 <https://vctms.jamashita.dev/labour>
 
+## ページ
+
+`src/app/labour/page.tsx`をあらかじめ用意してあります。`pnpm dev`した状態で<http://localhost:3000/labour>にアクセスすると「勤務時間管理をここに作ろう」とだけ表示されるはずです。このファイルの中身を書き換えて実装していきます。ページ自体の作りかたを忘れた場合は`docs/01-calculator.md`を見返してください。
+
 ### upstreamの更新を取り込む
 
 `docs/setup.md`の手順で`gh repo fork jamashita/dango --clone`を使ってcloneした場合、コピー元の`jamashita/dango`を指す`upstream`というリモートが自動的に設定されています。サンプルが更新されているのでそれを取得しましょう。
