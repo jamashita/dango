@@ -1,17 +1,15 @@
-import { promises } from 'fs';
-import { GetStaticProps, NextPage } from 'next';
-import { join } from 'path';
+'use client';
+
 import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
-import { Button } from '../components/Button';
-import { CatImage } from '../components/CatImage';
 import { Country, RandomCat } from '../lib/Types.js';
+import { Button } from './Button';
+import { CatImage } from './CatImage';
 
 type Props = Readonly<{
   countries: Array<Country>;
 }>;
 
-
-const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
+export const HomeView = ({ countries }: Props): ReactElement => {
   const [count, setCount] = useState<number>(0);
   const [labourHours, setLabourHours] = useState<string>('0');
   const [catImage, setCatImage] = useState<null | RandomCat>(null);
@@ -140,16 +138,3 @@ const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
     </>
   );
 };
-
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const buffer = await promises.readFile(join(process.cwd(), 'json', 'countries.json'));
-  const str = buffer.toString();
-
-  return {
-    props: {
-      countries: JSON.parse(str) as Array<Country>
-    }
-  };
-};
-
-export default IndexPage;
