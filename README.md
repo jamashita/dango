@@ -2,20 +2,26 @@
 
 This is your story.
 
+## Install dependencies
+
+```
+pnpm install
+```
+
 ## Run in development mode
 
 ```
-yarn dev
+pnpm dev
 ```
 
-## Format codes
+## Build for production
 
 ```
-yarn format
+pnpm build
 ```
 
 ## Run tests
 
 ```
-yarn test
+pnpm test
 ```

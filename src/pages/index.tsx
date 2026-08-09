@@ -1,7 +1,7 @@
 import { promises } from 'fs';
 import { GetStaticProps, NextPage } from 'next';
 import { join } from 'path';
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 import { Button } from '../components/Button';
 import { CatImage } from '../components/CatImage';
 import { Country, RandomCat } from '../lib/Types.js';
@@ -72,7 +72,7 @@ const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
             <input
               className="py-2 px-3 border-2 rounded border-gray-200 cursor-text"
               type="text"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
 
                 setLabourHours(e.target.value);
@@ -81,7 +81,7 @@ const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
             <input
               className="py-2 px-3 border-2 rounded border-gray-200 cursor-text"
               type="text"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
 
                 setLabourHours(e.target.value);
@@ -110,7 +110,7 @@ const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
             <input
               className="py-2 px-3 border-2 rounded border-gray-200 cursor-text"
               type="text"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
 
                 setLabourHours(e.target.value);
@@ -121,7 +121,7 @@ const IndexPage: NextPage<Props> = ({ countries }: Props): ReactElement => {
           <li>
             <select
               className="cursor-pointer border rounded py-3 px-4"
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                 console.log(e.target.value);
               }}
               value={0}
@@ -152,5 +152,4 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
-// eslint-disable-next-line import/no-default-export
 export default IndexPage;

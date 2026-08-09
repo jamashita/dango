@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 
 const NotFoundPage: FC = (): ReactElement => {
   return (
@@ -6,5 +6,4 @@ const NotFoundPage: FC = (): ReactElement => {
   );
 };
 
-// eslint-disable-next-line import/no-default-export
 export default NotFoundPage;

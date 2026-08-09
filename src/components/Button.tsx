@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react';
+import { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react';
 
 type Props = Readonly<{
   disabled?: boolean;
