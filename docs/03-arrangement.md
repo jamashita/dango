@@ -39,6 +39,7 @@ pnpm install
 
 1. テーブルの数を数字で入力できること
     - 数字以外が入力されている間はエラーメッセージを出すか、そもそも数字を入力できないようにすること
+    - (補足) `<input type="text" ...>`のバリデーションだけで対応してもよいですし、`<input type="number" ...>`にすると数字以外を入力しづらいフォームになります。どちらでも構いません
 2. 参加者の名前を入力できるようにすること
     - 参加者は人数を増減できるようにすること
 3. テーブルの数が正の整数で、かつ参加者の名前がすべて入力されているときに座席を決めるボタンを押せるようになること
@@ -136,4 +137,20 @@ const isPositiveInteger = (value: string): boolean => {
 </Button>
 ```
 
-`isValid`は「テーブルの数が正の整数か（`isPositiveInteger`）」と「参加者の名前が全部入力されているか」をまとめた`boolean`型の変数を自分で用意してください。「配列の中身が全部条件を満たしているか」は`participants.every((name) => name !== '')`のように`every`を使うと判定できます。
+`isValid`は「テーブルの数が正の整数か（`isPositiveInteger`）」と「参加者の名前が全部入力されているか」をまとめた`boolean`型の変数を自分で用意してください。
+
+「配列の中身が全部条件を満たしているか」は`every()`を使うと判定できます。渡した関数が全要素で`true`を返したときだけ、全体としても`true`になります。
+
+```typescript=
+const names = ['たろう', 'はなこ', 'じろう'];
+
+console.log(names.every((name) => name !== '')); // true（全部空文字じゃない）
+
+const withEmpty = ['たろう', '', 'じろう'];
+
+console.log(withEmpty.every((name) => name !== '')); // false（ひとつ空文字がある）
+```
+
+```typescript=
+const isValid = isPositiveInteger(tableCountInput) && participants.every((name) => name !== '');
+```

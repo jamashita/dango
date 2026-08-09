@@ -163,6 +163,10 @@ gh --version
 
 (注意) `pnpm dev`は自動的に終了しないので、自分で終了する必要があります。そのときはTerminalにフォーカスを合わせてCtrl + cする必要があります
 
+## 次のステップ
+
+ここまでできたら準備は完了です。最初の課題は[docs/01-calculator.md](01-calculator.md)（電卓をつくろう）です。
+
 ## 開発する上で参考になる書籍
 
 - [サバイバルTypeScript](https://typescriptbook.jp/)
