@@ -136,17 +136,42 @@ pnpm install
 
 - `src/pages/index.tsx` は廃止され、以下に分割されました。
   - `src/app/page.tsx` … サーバー側で `countries.json` を読み込む Server Component
-  - `src/components/HomeView.tsx` … ボタンやフォームなど、画面上で状態を持つ部分（`'use client'`）
+  - `src/components/samples/HomeView.tsx` … ボタンやフォームなど、画面上で状態を持つ部分（`'use client'`）
 - `src/pages/_app.tsx` → `src/app/layout.tsx`（共通レイアウト、`globals.css` の読み込みもここ）
 - `src/pages/404.tsx` → `src/app/not-found.tsx`
 - 新しいページを作るときは `src/pages/xxx.tsx` ではなく `src/app/xxx/page.tsx` を作成してください。
 
-## 8. Tailwind CSS の書き方が変わっている
+## 8. 自分でつくった課題のページを移行する
+
+すでに `src/pages/xxx.tsx` として自分の課題（電卓など）を実装していた人向けの手順です。
+
+`upstream` の更新を取り込む（各課題の docs に書いてある `git fetch upstream && git merge upstream/main`）と、`jamashita/dango` 側ではすでに `src/pages/` が削除済みなので、あなたの手元でも `index.tsx` ・ `_app.tsx` ・ `404.tsx` は自動的に消えます。
+
+一方で、あなたが自分で追加した `src/pages/calculator.tsx` のようなファイルは upstream 側に存在しないため、merge しても消えずにそのまま残ります。そして同時に `src/app/calculator/page.tsx` という新しい（中身が空の）ファイルが増えているはずです。
+
+このままだと同じ機能のファイルが2つ存在してしまいます。App Router 側が優先して表示されるので、古い `src/pages/calculator.tsx` は「動いているように見えて実はもう使われていない」状態になります。以下の手順で中身を移してください。
+
+1. `src/app/calculator/page.tsx`（新しい方、まだ中身が空）を開く
+2. `src/pages/calculator.tsx`（自分が書いたコード）の中身を確認する
+3. 以下の3点を直しながら、ロジックを新しいファイルにコピーする
+    - ファイルの一番上に `'use client';` を追加する（`useState` や `onClick` を使っているページなら必要です）
+    - `import { NextPage } from 'next';` と `NextPage` 型は使いません。`const CalculatorPage = (): ReactElement => { ... };` のように書いてください
+    - importのパスを直す。`src/pages/calculator.tsx` から見た `../components/Button` は、`src/app/calculator/page.tsx` から見ると1階層深くなるため `../../components/Button` になります
+4. `pnpm dev` でブラウザから動作を確認する
+5. 問題なければ古いファイルを削除する。`src/pages` フォルダの中が空になったら、フォルダごと削除して構いません
+
+```
+rm src/pages/calculator.tsx
+```
+
+(補足) `getStaticProps` などでデータを読み込んでいた人は、`src/app/page.tsx` + `src/components/samples/HomeView.tsx`（トップページ）や `src/app/incremental-search/`（`#4`）の構成を参考にしてください。データを読み込む部分はサーバー側の `page.tsx` に、画面や状態を持つ部分はクライアント側のファイル（`'use client'`）に分ける必要があります。
+
+## 9. Tailwind CSS の書き方が変わっている
 
 - `tailwind.config.ts` は廃止しました。デフォルト設定のままだったため、v4では設定ファイル自体が不要です。
 - スタイルの起点は `src/styles/globals.css` の `@import 'tailwindcss';` です。クラス名（`bg-cyan-600` など）の使い方自体は変わっていません。
 
-## 9. エディタの ESLint 拡張について
+## 10. エディタの ESLint 拡張について
 
 このリポジトリからは ESLint 設定を削除しました。VS Code などで ESLint 拡張を有効にしていると「設定が見つからない」という警告が出ることがありますが、動作に影響はないので無視して問題ありません。気になる場合はこのワークスペースだけ拡張を無効化してください。
 
