@@ -165,7 +165,7 @@ gh --version
 
 ## 次のステップ
 
-ここまでできたら準備は完了です。最初の課題は[docs/01-calculator.md](01-calculator.md)（電卓をつくろう）です。
+ここまでできたら準備は完了です。最初の課題は[docs/00-counter.md](00-counter.md)（カウンターをつくろう）です。プログラミング自体に慣れている人は、いきなり[docs/01-calculator.md](01-calculator.md)（電卓をつくろう）から始めても構いません。
 
 ## 開発する上で参考になる書籍
 
