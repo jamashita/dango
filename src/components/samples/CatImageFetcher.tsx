@@ -1,8 +1,9 @@
+// サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 'use client';
 
 import { ReactElement, useEffect, useState } from 'react';
-import { RandomCat } from '../lib/Types.js';
-import { CatImage } from './CatImage';
+import { RandomCat } from '../../lib/Types.js';
+import { CatImage } from '../CatImage';
 
 export const CatImageFetcher = (): ReactElement => {
   const [catImage, setCatImage] = useState<null | RandomCat>(null);

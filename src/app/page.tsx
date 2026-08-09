@@ -1,7 +1,7 @@
 import { promises } from 'fs';
 import { join } from 'path';
 import { ReactElement } from 'react';
-import { HomeView } from '../components/HomeView';
+import { HomeView } from '../components/samples/HomeView';
 import { Country } from '../lib/Types.js';
 
 const HomePage = async (): Promise<ReactElement> => {

@@ -1,5 +1,6 @@
+// サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 import { ReactElement } from 'react';
-import { Country } from '../lib/Types.js';
+import { Country } from '../../lib/Types.js';
 
 type Props = Readonly<{
   countries: Array<Country>;

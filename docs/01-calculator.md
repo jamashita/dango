@@ -40,6 +40,10 @@
 ### Next.jsを理解する
 ページの追加のしかた
 
+電卓のページはあらかじめ`src/app/calculator/page.tsx`として用意してあります。`pnpm dev`した状態で<http://localhost:3000/calculator>にアクセスすると「電卓をここに作ろう」とだけ表示されるはずです。このファイルの中身を書き換えて電卓を実装していきます。
+
+自分でこのファイルを消してしまった場合や、次回以降の課題で新しくページを作るときのために、仕組みも説明しておきます。
+
 - `src/app`の中に、URLにしたい名前のフォルダを作り、その中に`page.tsx`という名前のファイルを置く
     - `src/app/calculator/page.tsx`というファイルを作ったら
     `http://localhost:3000/calculator`というURLになる
@@ -67,7 +71,9 @@ const CalculatorPage = (): ReactElement => {
 export default CalculatorPage;
 ```
 
-数字ボタンを押すたびに表示へ数字をつなげていく、という電卓に近い実装例は`src/components/Counter.tsx`にあるので参考にしてください。ただし以下は`Counter.tsx`には入れていないので、要件を見ながら自分で実装してください。
+数字ボタンを押すたびに表示へ数字をつなげていく、という電卓に近い実装例は`src/components/samples/Counter.tsx`にあるので参考にしてください。これはトップページ(`http://localhost:3000/`)にそのまま表示されているサンプルなので、**このファイル自体をimportしたり書き換えたりしないでください**（書き換えるとトップページの見た目も変わってしまいます）。コードを読んで、同じような書き方を`src/app/calculator/page.tsx`に書いてください。
+
+以下は`Counter.tsx`には入れていないので、要件を見ながら自分で実装してください。
 
 - `+, -, *, /, =`のボタンと、それが押されたときの処理
 - 小数点や`0`除算などの細かい処理

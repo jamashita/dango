@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Country } from '../lib/Types.js';
+import { Country } from '../../lib/Types.js';
 import { CatImageFetcher } from './CatImageFetcher';
 import { Counter } from './Counter';
 import { CountryList } from './CountryList';
