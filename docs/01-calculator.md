@@ -45,9 +45,9 @@
     `http://localhost:3000/calculator`というURLになる
 - 電卓はボタンを押したら表示が変わるページなので、ファイルの一番上に`'use client';`という1行を書く必要がある
     - これを書くと「ブラウザ側で動くページ」になり、`useState`やボタンの`onClick`が使えるようになる
-- 中身の書きかたは`src/components/HomeView.tsx`を参考にするとよい。ただし`page.tsx`は書きかたが少し違うので注意
-    - `HomeView.tsx`: `export const HomeView = (): ReactElement => { ... };`
-    - `page.tsx`: `export default`を使う必要がある
+- `page.tsx`は`export default`を使う必要がある（`src/components`にある部品ファイルとは書きかたが少し違うので注意）
+
+最低限のページの骨組みは以下の通り。ボタンを押すたびに表示の末尾に文字をつなげている点に注目してください（数値の足し算ではありません）
 
 ```typescript=
 'use client';
@@ -55,17 +55,24 @@
 import { ReactElement, useState } from 'react';
 
 const CalculatorPage = (): ReactElement => {
-  const [count, setCount] = useState<number>(0);
+  const [display, setDisplay] = useState<string>('0');
 
   return (
-    <button type="button" onClick={() => setCount(count + 1)}>
-      {count}
+    <button type="button" onClick={() => setDisplay(display + '1')}>
+      {display}
     </button>
   );
 };
 
 export default CalculatorPage;
 ```
+
+数字ボタンを押すたびに表示へ数字をつなげていく、という電卓に近い実装例は`src/components/Counter.tsx`にあるので参考にしてください。ただし以下は`Counter.tsx`には入れていないので、要件を見ながら自分で実装してください。
+
+- `+, -, *, /, =`のボタンと、それが押されたときの処理
+- 小数点や`0`除算などの細かい処理
+
+(補足) `Counter.tsx`の中の`DIGITS.map(...)`は、9個のボタンをまとめて作るための書き方です。`.map`がまだわからなければ、無理に使わず1個ずつ9回書いても問題ありません。
 
 ### React.jsを理解する
 
