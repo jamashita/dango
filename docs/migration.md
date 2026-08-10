@@ -102,6 +102,22 @@ git checkout main
 git pull
 ```
 
+### upstream リモートがあるか確認する
+
+各課題の`docs/`には、サンプルの更新を取り込むために`git fetch upstream && git merge upstream/main`を実行する手順が書かれています。この`upstream`は本来[docs/setup.md](setup.md)の`gh repo fork jamashita/dango --clone`を使うと自動で設定されるリモートです。しかし`yarn`時代に別の方法（GitHubの画面からForkして`git clone`する、など）で環境を作った人は設定されていないことがあります。`gh`コマンドがインストールされていなくても以下の方法で追加できるので、このタイミングで確認しておいてください。
+
+1. 以下を実行し、`upstream`という行が表示されるか確認する
+    ```
+    git remote -v
+    ```
+2. 表示されない場合は、以下を実行して追加する（`gh`は不要です）
+    ```
+    git remote add upstream git@github.com:jamashita/dango.git
+    ```
+3. もう一度`git remote -v`を実行し、`upstream`が`fetch`・`push`両方の行に表示されればOKです
+
+これで以降、各課題のdocsに書かれている`git fetch upstream && git merge upstream/main`がそのまま使えるようになります。
+
 ## 4. mise でツールを揃える
 
 `dango` ディレクトリ内で実行してください（`mise.toml` を検出して初回は信頼確認が入ります）。
