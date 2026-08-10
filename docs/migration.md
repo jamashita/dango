@@ -180,7 +180,7 @@ pnpm install
 rm src/pages/calculator.tsx
 ```
 
-(補足) `getStaticProps` などでデータを読み込んでいた人は、`src/app/page.tsx` + `src/components/samples/HomeView.tsx`（トップページ）や `src/app/incremental-search/`（`#4`）の構成を参考にしてください。データを読み込む部分はサーバー側の `page.tsx` に、画面や状態を持つ部分はクライアント側のファイル（`'use client'`）に分ける必要があります。
+(補足) `getStaticProps` などでデータを読み込んでいた人は、`src/app/page.tsx` + `src/components/samples/HomeView.tsx`（トップページ）や `src/app/search/`（`#5`）の構成を参考にしてください。データを読み込む部分はサーバー側の `page.tsx` に、画面や状態を持つ部分はクライアント側のファイル（`'use client'`）に分ける必要があります。
 
 ## 9. Tailwind CSS の書き方が変わっている
 

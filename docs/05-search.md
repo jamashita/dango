@@ -1,4 +1,4 @@
-# #4 インクリメンタルサーチをしよう
+# #5 インクリメンタルサーチをしよう
 
 フォームに入力すると即座に入力内容が絞られるインクリメンタルサーチをしよう。
 
@@ -14,7 +14,7 @@
 
 `src/app/search/`に2つのファイルをあらかじめ用意してあります。
 
-- `page.tsx` … `json/countries.json`を読み込んで`IncrementalSearchView`に渡すだけのファイルです。今回は`countries`のデータをサーバー側で読み込む必要があるため、`#1`〜`#3`と違って`page.tsx`自体は`'use client'`にできません（データの読み込みは`fs`を使うため、ブラウザ側では動かせません）。このファイルは書き換える必要はありません
+- `page.tsx` … `json/countries.json`を読み込んで`IncrementalSearchView`に渡すだけのファイルです。今回は`countries`のデータをサーバー側で読み込む必要があるため、`#1`〜`#4`と違って`page.tsx`自体は`'use client'`にできません（データの読み込みは`fs`を使うため、ブラウザ側では動かせません）。このファイルは書き換える必要はありません
 - `IncrementalSearchView.tsx` … 実際に検索フォームと結果一覧を作る、皆さんが書き換えるファイルです。`countries`という、国のデータが入った配列をpropsとして受け取っています
 
 `pnpm dev`した状態で<http://localhost:3000/search>にアクセスすると「インクリメンタルサーチをここに作ろう（249件のデータを受け取っています）」のように表示されるはずです。件数が表示されていれば、データの受け渡しは正しくできています。
@@ -68,7 +68,7 @@ const evenNumbers = numbers.filter((num) => num % 2 === 0);
 console.log(evenNumbers); // [2, 4]
 ```
 
-これを`countries`に対して使えば、入力した文字列を含む国だけに絞り込める。`string.includes()`は`#1 電卓をつくろう`で小数点の判定に使ったのと同じ関数です。
+これを`countries`に対して使えば、入力した文字列を含む国だけに絞り込める。`string.includes()`は`#2 電卓をつくろう`で小数点の判定に使ったのと同じ関数です。
 
 ```typescript=
 const [query, setQuery] = useState<string>('');
