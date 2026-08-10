@@ -8,16 +8,16 @@
 
 ## 完成例
 
-現在のところありません。
+<https://vctms.jamashita.dev/search>
 
 ## ページ
 
-`src/app/incremental-search/`に2つのファイルをあらかじめ用意してあります。
+`src/app/search/`に2つのファイルをあらかじめ用意してあります。
 
 - `page.tsx` … `json/countries.json`を読み込んで`IncrementalSearchView`に渡すだけのファイルです。今回は`countries`のデータをサーバー側で読み込む必要があるため、`#1`〜`#3`と違って`page.tsx`自体は`'use client'`にできません（データの読み込みは`fs`を使うため、ブラウザ側では動かせません）。このファイルは書き換える必要はありません
 - `IncrementalSearchView.tsx` … 実際に検索フォームと結果一覧を作る、皆さんが書き換えるファイルです。`countries`という、国のデータが入った配列をpropsとして受け取っています
 
-`pnpm dev`した状態で<http://localhost:3000/incremental-search>にアクセスすると「インクリメンタルサーチをここに作ろう（249件のデータを受け取っています）」のように表示されるはずです。件数が表示されていれば、データの受け渡しは正しくできています。
+`pnpm dev`した状態で<http://localhost:3000/search>にアクセスすると「インクリメンタルサーチをここに作ろう（249件のデータを受け取っています）」のように表示されるはずです。件数が表示されていれば、データの受け渡しは正しくできています。
 
 ### upstreamの更新を取り込む
 

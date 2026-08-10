@@ -8,7 +8,7 @@
 
 ## 完成例
 
-現在のところありません。
+<https://vctms.jamashita.dev/counter>
 
 ## ページ
 

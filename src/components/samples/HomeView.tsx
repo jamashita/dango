@@ -6,6 +6,7 @@ import { CountryList } from './CountryList';
 import { FormShowcase } from './FormShowcase';
 import { LabourHoursCalculator } from './LabourHoursCalculator';
 import { SimpleCounter } from './SimpleCounter';
+import { Stopwatch } from './Stopwatch';
 
 type Props = Readonly<{
   countries: Array<Country>;
@@ -19,6 +20,7 @@ export const HomeView = ({ countries }: Props): ReactElement => {
       <LabourHoursCalculator />
       <CountryList countries={countries} />
       <FormShowcase />
+      <Stopwatch />
       <CatImageFetcher />
     </>
   );
