@@ -5,6 +5,7 @@ import { Counter } from './Counter';
 import { CountryList } from './CountryList';
 import { FormShowcase } from './FormShowcase';
 import { LabourHoursCalculator } from './LabourHoursCalculator';
+import { MaskedCode } from './MaskedCode';
 import { SimpleCounter } from './SimpleCounter';
 import { Stopwatch } from './Stopwatch';
 
@@ -17,6 +18,7 @@ export const HomeView = ({ countries }: Props): ReactElement => {
     <>
       <SimpleCounter />
       <Counter />
+      <MaskedCode />
       <LabourHoursCalculator />
       <CountryList countries={countries} />
       <FormShowcase />
