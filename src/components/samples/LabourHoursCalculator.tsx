@@ -1,7 +1,7 @@
 // サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 'use client';
 
-import { ChangeEvent, ReactElement, useState } from 'react';
+import { type ChangeEvent, type ReactElement, useState } from 'react';
 
 export const LabourHoursCalculator = (): ReactElement => {
   const [labourHours, setLabourHours] = useState<string>('0');
@@ -31,7 +31,9 @@ export const LabourHoursCalculator = (): ReactElement => {
               setLabourHours(e.target.value);
             }}
           />
-          <span className="select-none text-xl font-mono text-gray-700 text-right">{labourHours}</span>
+          <span className="select-none text-xl font-mono text-gray-700 text-right">
+            {labourHours}
+          </span>
         </div>
       </div>
     </div>

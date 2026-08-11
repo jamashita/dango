@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import { ReactElement, ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactElement, ReactNode } from 'react';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Dango',
-  description: 'This is your story.'
+  description: 'This is your story.',
 };
 
 type Props = Readonly<{

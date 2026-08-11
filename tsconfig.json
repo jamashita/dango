@@ -12,10 +12,7 @@
     /* Language and Environment */
     "target": "esnext",
     /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     "jsx": "react-jsx",
     /* Specify what JSX code is generated. */
@@ -40,10 +37,7 @@
     // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
-    "types": [
-      "node",
-      "vitest/globals"
-    ],
+    "types": ["node", "vitest/globals"],
     /* Specify type package names to be included without being referenced in a source file. */
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
@@ -132,9 +126,8 @@
     // "allowUnreachableCode": true,                     /* Disable error reporting for unreachable code. */
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true
-    /* Skip type checking all .d.ts files. */,
-    "plugins": [
+    "skipLibCheck": true,
+    /* Skip type checking all .d.ts files. */ "plugins": [
       {
         "name": "next"
       }
@@ -147,8 +140,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "vitest.config.ts"
-  ]
+  "exclude": ["node_modules", "vitest.config.ts"]
 }

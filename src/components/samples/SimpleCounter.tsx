@@ -1,7 +1,7 @@
 // サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 'use client';
 
-import { ReactElement, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { Button } from '../Button';
 
 export const SimpleCounter = (): ReactElement => {

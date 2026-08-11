@@ -1,11 +1,9 @@
 'use client';
 
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 const CounterPage = (): ReactElement => {
-  return (
-    <div>カウンターをここに作ろう</div>
-  );
+  return <div>カウンターをここに作ろう</div>;
 };
 
 export default CounterPage;

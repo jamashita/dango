@@ -1,7 +1,7 @@
 // サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 'use client';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 
 export const Stopwatch = (): ReactElement => {
   const [seconds, setSeconds] = useState<number>(0);

@@ -1,8 +1,8 @@
 // サンプル: トップページ(/)で表示中。直接編集せず、書き方を真似て自分のページに書いてください
 'use client';
 
-import { ReactElement, useEffect, useState } from 'react';
-import { RandomCat } from '../../lib/Types.js';
+import { type ReactElement, useEffect, useState } from 'react';
+import type { RandomCat } from '../../lib/Types.js';
 import { CatImage } from '../CatImage';
 
 export const CatImageFetcher = (): ReactElement => {
@@ -10,7 +10,7 @@ export const CatImageFetcher = (): ReactElement => {
 
   useEffect(() => {
     fetch('https://api.thecatapi.com/v1/images/search').then(async (res: Response) => {
-      const json: Array<RandomCat> = await res.json() as Array<RandomCat>;
+      const json: Array<RandomCat> = (await res.json()) as Array<RandomCat>;
 
       setCatImage(json[0]!);
     });

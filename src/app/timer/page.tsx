@@ -1,11 +1,9 @@
 'use client';
 
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 const CountdownTimerPage = (): ReactElement => {
-  return (
-    <div>カウントダウンタイマーをここに作ろう</div>
-  );
+  return <div>カウントダウンタイマーをここに作ろう</div>;
 };
 
 export default CountdownTimerPage;

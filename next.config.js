@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   turbopack: {},
-  agentRules: false
+  agentRules: false,
 };
 
 export default nextConfig;

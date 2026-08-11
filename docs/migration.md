@@ -13,7 +13,7 @@
 | React | 18.x | 19.x |
 | TypeScript | 5.x | 6.x |
 | Tailwind CSS | 3.x (`tailwind.config.ts`) | 4.x (CSSファイルで`@import`) |
-| ESLint | あり | 削除（教育上使わない方針のため） |
+| Linter/Formatter | ESLint | [Biome](https://biomejs.dev/) |
 
 ## 1. mise をインストールする
 
@@ -144,7 +144,7 @@ pnpm install
 | ビルド | `yarn build` | `pnpm build` |
 | 本番起動 | `yarn start` | `pnpm start` |
 | テスト | `yarn test` | `pnpm test` |
-| フォーマット/lint | `yarn format` | なし（ESLint削除のため） |
+| フォーマット/lint | `yarn format` | `pnpm format` / `pnpm lint` |
 | パッケージ追加 | `yarn add <pkg>` | `pnpm add <pkg>` |
 | 開発用パッケージ追加 | `yarn add -D <pkg>` | `pnpm add -D <pkg>` |
 
@@ -187,9 +187,11 @@ rm src/pages/calculator.tsx
 - `tailwind.config.ts` は廃止しました。デフォルト設定のままだったため、v4では設定ファイル自体が不要です。
 - スタイルの起点は `src/styles/globals.css` の `@import 'tailwindcss';` です。クラス名（`bg-cyan-600` など）の使い方自体は変わっていません。
 
-## 10. エディタの ESLint 拡張について
+## 10. エディタの Biome 拡張について
 
-このリポジトリからは ESLint 設定を削除しました。VS Code などで ESLint 拡張を有効にしていると「設定が見つからない」という警告が出ることがありますが、動作に影響はないので無視して問題ありません。気になる場合はこのワークスペースだけ拡張を無効化してください。
+このリポジトリでは ESLint の代わりに [Biome](https://biomejs.dev/) をフォーマッタ/リンタとして使っています。VS Code の場合は拡張機能タブから `Biome`（`biomejs.biome`）をインストールしてください。`.vscode/settings.json` で保存時フォーマット・自動修正を有効にしてあるので、拡張を入れれば追加設定なしで保存するたびに整形・lintが走ります。
+
+ESLint 拡張を有効にしている場合は「設定が見つからない」という警告が出ることがありますが、動作に影響はないので無視して問題ありません。気になる場合はこのワークスペースだけ ESLint 拡張を無効化してください。
 
 ## うまくいかないときは
 

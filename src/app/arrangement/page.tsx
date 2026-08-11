@@ -1,11 +1,9 @@
 'use client';
 
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 const ArrangementPage = (): ReactElement => {
-  return (
-    <div>座席決めをここに作ろう</div>
-  );
+  return <div>座席決めをここに作ろう</div>;
 };
 
 export default ArrangementPage;
