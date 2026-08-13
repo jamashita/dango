@@ -61,10 +61,11 @@ scoop install mise
 どちらかの方法でインストールできたら、PowerShellのプロファイルに以下を追加してターミナル（PowerShell）を再起動してください。
 
 ```powershell
-echo '(&mise activate pwsh) | Out-String | Invoke-Expression' >> $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+New-Item -ItemType Directory -Force -Path (Split-Path $PROFILE) | Out-Null
+Add-Content -Path $PROFILE -Value '(&mise activate pwsh) | Out-String | Invoke-Expression'
 ```
 
-> プロファイルファイルの場所が無いと言われた場合は、`$HOME\Documents\PowerShell` フォルダを先に作成してから再実行してください。
+> 1行目でプロファイル用フォルダ（`Documents\PowerShell` など）が無ければ作成し、2行目でそこに設定を追記します。`$PROFILE` は環境ごとのプロファイルファイルの場所を指すPowerShell組み込みの変数なので、パスを自分で書き換える必要はありません。
 > コマンドプロンプト（`cmd.exe`）ではなく **PowerShell** を使ってください。VS Codeのターミナルもデフォルト設定でPowerShellになっているはずです。
 
 ### 共通: インストール確認
@@ -116,7 +117,14 @@ git pull
     ```
 3. もう一度`git remote -v`を実行し、`upstream`が`fetch`・`push`両方の行に表示されればOKです
 
-これで以降、各課題のdocsに書かれている`git fetch upstream && git merge upstream/main`がそのまま使えるようになります。
+`upstream`が確認できたら、このタイミングで一度実行して最新化しておきましょう。
+
+```
+git fetch upstream
+git merge upstream/main
+```
+
+これで以降も、各課題のdocsに書かれている`git fetch upstream && git merge upstream/main`がそのまま使えるようになります。
 
 ## 4. mise でツールを揃える
 
@@ -196,5 +204,30 @@ ESLint 拡張を有効にしている場合は「設定が見つからない」�
 ## うまくいかないときは
 
 - `pnpm install` でエラーが出る → `node -v` / `pnpm -v` が `mise.toml` の値と一致しているか確認してください（`mise install` をやり直す）。
+- `node -v` / `pnpm -v` が `mise.toml` の値と一致しない、かつ以前 [Volta](https://volta.sh/) で Node をインストールしたことがある → Voltaが干渉している可能性があります。以下の手順でVoltaを消してください。
+
+    1. 入っているか確認する
+        ```
+        volta --version
+        ```
+        コマンドが見つからなければVoltaは入っていないので、この項目は無視してOKです。
+
+    2. アンインストールする
+
+        **macOS / Linux**
+        ```
+        rm -rf ~/.volta
+        ```
+        続けて `~/.zshrc`（`bash`の場合は `~/.bashrc` や `~/.bash_profile`）を開き、以下のような行が残っていれば削除してください。
+        ```
+        export VOLTA_HOME="$HOME/.volta"
+        export PATH="$VOLTA_HOME/bin:$PATH"
+        ```
+
+        **Windows**
+
+        設定アプリの「アプリと機能」（または「プログラムの追加と削除」）から `Volta` を検索してアンインストールしてください。インストーラー経由でPATHや環境変数も自動的に片付きます。
+
+    3. ターミナルを再起動し、`node -v` が `mise.toml` の値と一致すれば完了です。
 - 画面が真っ白 / 古いページが表示される → `.next` を消してから `pnpm dev` をやり直してください（macOS/Linux: `rm -rf .next` / Windows: `Remove-Item -Recurse -Force .next`）。
 - それでも解決しない場合は `node_modules` ごと消して `pnpm install` からやり直してください。
