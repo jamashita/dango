@@ -47,8 +47,9 @@ Node.jsとpnpmのバージョンは、このリポジトリの`mise.toml`とい�
     `winget`が`認識されません`と言われた場合は、Microsoft Storeで[App Installer](https://apps.microsoft.com/detail/9nblggh4nns1)をインストールしてからもう一度試してください。それでも難しい場合は代わりに[Scoop](https://scoop.sh/)を使う方法もあります(詳しくは[docs/migration.md](migration.md)を参照)。
 
     インストールできたら、PowerShellのプロファイルに以下を追加してPowerShellを再起動する
-    ```
-    echo '(&mise activate pwsh) | Out-String | Invoke-Expression' >> $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+    ```powershell
+    New-Item -ItemType Directory -Force -Path (Split-Path $PROFILE) | Out-Null
+    Add-Content -Path $PROFILE -Value '(&mise activate pwsh) | Out-String | Invoke-Expression'
     ```
 1. GitHub CLI(`gh`)をmiseでインストールする
     PowerShellで以下を実行する
