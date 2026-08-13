@@ -58,14 +58,18 @@ scoop install mise
 
 ---
 
-どちらかの方法でインストールできたら、PowerShellのプロファイルに以下を追加してターミナル（PowerShell）を再起動してください。
+どちらかの方法でインストールできたら、miseが管理するnode/pnpm/ghなどのコマンドにPATHを通します（**Scoopでインストールした場合はすでに自動で設定されているので、この手順は不要です**）。
 
-```powershell
-New-Item -ItemType Directory -Force -Path (Split-Path $PROFILE) | Out-Null
-Add-Content -Path $PROFILE -Value '(&mise activate pwsh) | Out-String | Invoke-Expression'
-```
+1. PowerShellで以下を実行し、出力される `dirs:` の `shims:` に表示されたパスをメモする
+    ```powershell
+    mise doctor
+    ```
+    例: `C:\Users\ユーザー名\AppData\Local\mise\shims`
+2. スタートメニューで「環境変数」と検索し、「環境変数を編集」（アカウントの環境変数を編集する）を開く
+3. 「〇〇のユーザー環境変数」の一覧から `Path` を選んで「編集」をクリック
+4. 「新規」をクリックし、1でメモしたパスを追加する
+5. 「OK」を押してすべて閉じ、開いているPowerShell・VS Codeをすべて完全に閉じてから開き直す
 
-> 1行目でプロファイル用フォルダ（`Documents\PowerShell` など）が無ければ作成し、2行目でそこに設定を追記します。`$PROFILE` は環境ごとのプロファイルファイルの場所を指すPowerShell組み込みの変数なので、パスを自分で書き換える必要はありません。
 > コマンドプロンプト（`cmd.exe`）ではなく **PowerShell** を使ってください。VS Codeのターミナルもデフォルト設定でPowerShellになっているはずです。
 
 ### 共通: インストール確認

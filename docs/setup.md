@@ -46,11 +46,16 @@ Node.jsとpnpmのバージョンは、このリポジトリの`mise.toml`とい�
     ```
     `winget`が`認識されません`と言われた場合は、Microsoft Storeで[App Installer](https://apps.microsoft.com/detail/9nblggh4nns1)をインストールしてからもう一度試してください。それでも難しい場合は代わりに[Scoop](https://scoop.sh/)を使う方法もあります(詳しくは[docs/migration.md](migration.md)を参照)。
 
-    インストールできたら、PowerShellのプロファイルに以下を追加してPowerShellを再起動する
-    ```powershell
-    New-Item -ItemType Directory -Force -Path (Split-Path $PROFILE) | Out-Null
-    Add-Content -Path $PROFILE -Value '(&mise activate pwsh) | Out-String | Invoke-Expression'
-    ```
+    インストールできたら、miseが管理するnode/pnpm/ghなどのコマンドにPATHを通します。
+    1. PowerShellで以下を実行し、出力される `dirs:` の `shims:` に表示されたパスをメモする
+        ```powershell
+        mise doctor
+        ```
+        例: `C:\Users\ユーザー名\AppData\Local\mise\shims`
+    2. スタートメニューで「環境変数」と検索し、「環境変数を編集」（アカウントの環境変数を編集する）を開く
+    3. 「〇〇のユーザー環境変数」の一覧から `Path` を選んで「編集」をクリック
+    4. 「新規」をクリックし、1でメモしたパスを追加する
+    5. 「OK」を押してすべて閉じ、開いているPowerShell・VS Codeをすべて完全に閉じてから開き直す
 1. GitHub CLI(`gh`)をmiseでインストールする
     PowerShellで以下を実行する
     ```
@@ -167,14 +172,9 @@ gh --version
 
 ## うまくいかないときは
 
-- `mise install`は終わっているはずなのに`node -v` / `pnpm -v`が`command not found`（Windowsでは`not recognized`）になる → インストール自体はできていて、ターミナルにまだ反映されていないだけのことが多いです。
-    - **Windows**: ターミナルが`PowerShell`になっているか確認してください（プロンプトが`PS ...>`から始まるか）。`cmd.exe`だと`mise activate`が効きません
-    - `mise activate`をプロファイルに追加した後、ターミナルを一度も開き直していない → VSCodeのTerminalパネルのゴミ箱アイコンで一度終了し、View > Terminalで新しく開き直す（VSCode自体の再起動でも可）
-    - それでも直らない場合は`mise doctor`を実行してエラーを確認してください。`mise shims are not on PATH`と出た場合は、shims用フォルダをユーザーのPATHに直接追加すると解決します（**Windows**の場合）
-        1. スタートメニューで「環境変数」と検索し、「環境変数を編集」（アカウントの環境変数を編集する）を開く
-        2. 「〇〇のユーザー環境変数」の一覧から`Path`を選んで「編集」をクリック
-        3. 「新規」をクリックし、`%LOCALAPPDATA%\mise\shims` を追加する
-        4. 「OK」を押してすべて閉じ、開いているPowerShell・VS Codeをすべて完全に閉じてから開き直す
+- `mise install`は終わっているはずなのに`node -v` / `pnpm -v`が`command not found`（Windowsでは`not recognized`）になる → インストール自体はできていて、PATHがまだ反映されていないだけのことが多いです。
+    - PATHを設定した（Windowsの上記手順、またはmacOSの`mise activate`）後、ターミナル（VS Codeの統合ターミナルも含む）を一度も開き直していない → すべて閉じてから開き直す
+    - それでも直らない場合は`mise doctor`を実行してエラーを確認してください。`shims_on_path: no`になっている場合は、上のWindowsセットアップ手順（`mise doctor`でshimsのパスを確認し、環境変数に追加する）をやり直してください
 - 以前 [Volta](https://volta.sh/) で Node をインストールしたことがある → Voltaが干渉している可能性があります。以下の手順で確認・アンインストールしてください。
     1. 入っているか確認する
         ```
