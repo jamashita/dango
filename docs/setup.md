@@ -109,6 +109,7 @@ gh --version
     - `Generate a new SSH key to add to your GitHub account?` → `Yes`
     - パスフレーズを聞かれたら、何も入力せずEnterでよい(空でよい)
     - `Title for your SSH key` → そのままEnter(自動で名前がつく)
+    - `Upload your SSH public key to your GitHub account?` → 矢印キーで`Skip`ではなく、上に表示されている鍵のタイトル（さっき決まった名前）の方を選んでEnter。`Skip`を選ぶと鍵がGitHubに登録されず、この後のログインに失敗します
     - `How would you like to authenticate GitHub CLI?` → `Login with a web browser`
 1. `First copy your one-time code: XXXX-XXXX`と表示されるので、そのコードを覚えておく
 1. Enterを押すとブラウザが開くので、GitHubにログインし、先ほどのコードを入力する
@@ -155,13 +156,48 @@ gh --version
 3. View > TerminalでTerminalを表示させる
 4. Terminalで`mise trust`を実行する(初回だけ、このリポジトリの`mise.toml`を信頼するか聞かれます)
 5. `mise install`を実行する(Node.jsとpnpmが自動的にインストールされます)
-6. `node -v`と`pnpm -v`を実行し、`command not found`にならないことを確認する
+6. `node -v`と`pnpm -v`を実行し、`command not found`（Windowsでは`not recognized`）にならないことを確認する。うまくいかない場合は下の「うまくいかないときは」を見てください
 7. `pnpm install`を実行する
 8. `pnpm dev`を実行する
 9. ブラウザで<http://localhost:3000>にアクセスするとサンプルが表示される
 
 
 (注意) `pnpm dev`は自動的に終了しないので、自分で終了する必要があります。そのときはTerminalにフォーカスを合わせてCtrl + cする必要があります
+
+## うまくいかないときは
+
+- `mise install`は終わっているはずなのに`node -v` / `pnpm -v`が`command not found`（Windowsでは`not recognized`）になる → インストール自体はできていて、ターミナルにまだ反映されていないだけのことが多いです。
+    - **Windows**: ターミナルが`PowerShell`になっているか確認してください（プロンプトが`PS ...>`から始まるか）。`cmd.exe`だと`mise activate`が効きません
+    - `mise activate`をプロファイルに追加した後、ターミナルを一度も開き直していない → VSCodeのTerminalパネルのゴミ箱アイコンで一度終了し、View > Terminalで新しく開き直す（VSCode自体の再起動でも可）
+    - それでも直らない場合は`mise doctor`を実行してエラーを確認してください。`mise shims are not on PATH`と出た場合は、shims用フォルダをユーザーのPATHに直接追加すると解決します（**Windows**の場合）
+        1. スタートメニューで「環境変数」と検索し、「環境変数を編集」（アカウントの環境変数を編集する）を開く
+        2. 「〇〇のユーザー環境変数」の一覧から`Path`を選んで「編集」をクリック
+        3. 「新規」をクリックし、`%LOCALAPPDATA%\mise\shims` を追加する
+        4. 「OK」を押してすべて閉じ、開いているPowerShell・VS Codeをすべて完全に閉じてから開き直す
+- 以前 [Volta](https://volta.sh/) で Node をインストールしたことがある → Voltaが干渉している可能性があります。以下の手順で確認・アンインストールしてください。
+    1. 入っているか確認する
+        ```
+        volta --version
+        ```
+        コマンドが見つからなければVoltaは入っていないので、この項目は無視してOKです。
+    2. アンインストールする
+
+        **macOS / Linux**
+        ```
+        rm -rf ~/.volta
+        ```
+        続けて `~/.zshrc`（`bash`の場合は `~/.bashrc` や `~/.bash_profile`）を開き、以下のような行が残っていれば削除してください。
+        ```
+        export VOLTA_HOME="$HOME/.volta"
+        export PATH="$VOLTA_HOME/bin:$PATH"
+        ```
+
+        **Windows**
+
+        設定アプリの「アプリと機能」（または「プログラムの追加と削除」）から `Volta` を検索してアンインストールしてください。インストーラー経由でPATHや環境変数も自動的に片付きます。
+    3. ターミナルを再起動し、`node -v`が期待通りのバージョンになれば完了です
+- 画面が真っ白 / 古いページが表示される → `.next` を消してから `pnpm dev` をやり直してください（macOS/Linux: `rm -rf .next` / Windows: `Remove-Item -Recurse -Force .next`）
+- それでも解決しない場合は `node_modules` ごと消して `pnpm install` からやり直してください
 
 ## 次のステップ
 
