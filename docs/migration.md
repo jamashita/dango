@@ -22,7 +22,7 @@ Node.js と pnpm のバージョンは `mise.toml` にリポジトリで固定�
 ### macOS / Linux
 
 ```
-curl https://mise.run | sh
+curl -fsSL https://mise.run | sh
 ```
 
 インストール後、シェルの設定（`.zshrc` など）に以下を追加してターミナルを再起動してください。
