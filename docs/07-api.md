@@ -115,3 +115,15 @@ fetch('https://api.thecatapi.com/v1/images/search').then((response: Response) =>
     import { CatImage } from '../../components/CatImage';
     ```
 - `useEffect`を使ってページを開いたときに1回通信する書き方は`src/components/samples/CatImageFetcher.tsx`に近いサンプルがあるので読んで参考にしてください。ただしこれは要件1（読み込み時の表示）のみのサンプルで、トップページ(`/`)にそのまま表示されているファイルなので直接編集しないでください
+
+## 動作を理解するためにやってみよう
+
+要件を満たせたら、自分で書いた`src/app/cat/page.tsx`を少しずつ書き換えて、動きがどう変わるかを確かめてみましょう。**書き換える前に「どうなるか」を予想してから試す**のがコツです。
+
+1. `response.json()`で取り出した`json`を`console.log`して、ブラウザのコンソールで中身を確かめてみよう。`RandomCat`型の`id`, `url`, `width`, `height`がどこにあるか見つけよう
+2. ブラウザの開発者ツールの「ネットワーク」タブを開いた状態でボタンを押し、通信が1回ずつ発生していることを確かめてみよう
+3. `useEffect`の中に`console.log('useEffect');`を書いて、ページを開いたときに何回表示されるか確かめよう
+    - `pnpm dev`で動かしているときは2回表示されることがあります。これは開発中だけReactが`useEffect`をわざと2回実行して、クリーンアップ忘れなどのバグを見つけやすくしているためです（`next.config.js`の`reactStrictMode: true`）
+4. 通信中は「読み込み中...」と表示し、画像が届いたら消えるようにしてみよう（`boolean`型のstateを1つ追加します）
+5. URLをわざと間違えて（例: `https://api.thecatapi.com/v1/images/searchxxx`）ボタンを押してみよう。何が起きるかコンソールで確かめ、`try { ... } catch { ... }`や`.catch()`を使って「画像を取得できませんでした」と表示するようにしてみよう
+6. ボタンを押すたびに前のねこ画像を消さず、下に並べて表示していくようにしてみよう（`#4 座席を決めよう`の「配列の要素を増やす」が使えます）
