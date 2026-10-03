@@ -127,3 +127,12 @@ fetch('https://api.thecatapi.com/v1/images/search').then((response: Response) =>
 4. 通信中は「読み込み中...」と表示し、画像が届いたら消えるようにしてみよう（`boolean`型のstateを1つ追加します）
 5. URLをわざと間違えて（例: `https://api.thecatapi.com/v1/images/searchxxx`）ボタンを押してみよう。何が起きるかコンソールで確かめ、`try { ... } catch { ... }`や`.catch()`を使って「画像を取得できませんでした」と表示するようにしてみよう
 6. ボタンを押すたびに前のねこ画像を消さず、下に並べて表示していくようにしてみよう（`#4 座席を決めよう`の「配列の要素を増やす」が使えます）
+
+### (Advanced) もっと挑戦したい人へ
+
+難易度が高めの問題です。上の問題をやり終えて、まだ余裕がある人は挑戦してみてください。
+
+1. ボタンを素早く何度も押したとき、最後に押した分の画像が表示されるとは限りません。なぜそうなるか考え、通信中はボタンを押せなくする方法や、`AbortController`で古い通信を取り消す方法を試してみよう
+2. `json as Array<RandomCat>`の`as`を使わずに、`unknown`型の値が本当に`RandomCat`の形をしているかを確かめる関数（`(value: unknown): value is RandomCat`）を書いてみよう
+3. 通信してねこのデータをstateに入れる処理を、`useRandomCat()`のような自分専用のフック（カスタムフック）に切り出してみよう
+4. 同じ考え方で、別の公開API（例: 犬の画像を返す`https://dog.ceo/api/breeds/image/random`）からも画像を取得して表示してみよう。返ってくるJSONの形が違うので、まず`console.log`で中身を確かめよう
