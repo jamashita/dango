@@ -218,11 +218,27 @@ ESLint 拡張を有効にしている場合は「設定が見つからない」�
 
     2. アンインストールする
 
+        (注意) `volta` 本体が残ったまま `volta` コマンドを実行すると、`Updating your Volta directory. This may take a few moments...` と表示されてデータフォルダが作り直されます。このメッセージが出たら本体がまだ残っているということなので、必ず **本体 → データフォルダ → PATHの設定** の順で消してください。
+
         **macOS / Linux**
+
+        まず本体がどこにあるか確認します。
+        ```
+        which -a volta
+        ```
+        `/opt/homebrew/bin/volta` や `/usr/local/bin/volta` が表示された場合は Homebrew で入れているので、先に本体を消します。
+        ```
+        brew uninstall volta
+        ```
+        続けてデータフォルダを消します。
         ```
         rm -rf ~/.volta
         ```
-        続けて `~/.zshrc`（`bash`の場合は `~/.bashrc` や `~/.bash_profile`）を開き、以下のような行が残っていれば削除してください。
+        最後にシェルの設定ファイルに Volta の設定が残っていないか探します。
+        ```
+        grep -n -i volta ~/.zshrc ~/.zprofile ~/.zshenv ~/.bashrc ~/.bash_profile ~/.profile 2>/dev/null
+        ```
+        何か表示されたら、そのファイルを開いて該当する行（以下のような行）を削除してください。
         ```
         export VOLTA_HOME="$HOME/.volta"
         export PATH="$VOLTA_HOME/bin:$PATH"
@@ -230,8 +246,22 @@ ESLint 拡張を有効にしている場合は「設定が見つからない」�
 
         **Windows**
 
-        設定アプリの「アプリと機能」（または「プログラムの追加と削除」）から `Volta` を検索してアンインストールしてください。インストーラー経由でPATHや環境変数も自動的に片付きます。
+        まず PowerShell で本体がどこにあるか確認します。
+        ```
+        Get-Command volta -All
+        ```
+        入れた方法に合わせて本体をアンインストールしてください。
+        - winget で入れた → `winget uninstall Volta.Volta`
+        - Scoop で入れた → `scoop uninstall volta`
+        - Chocolatey で入れた → `choco uninstall volta`
+        - インストーラー（`.msi`）で入れた、またはわからない → 設定アプリの「アプリと機能」（または「プログラムの追加と削除」）から `Volta` を検索してアンインストール
 
-    3. ターミナルを再起動し、`node -v` が `mise.toml` の値と一致すれば完了です。
+        続けてデータフォルダを消します。
+        ```
+        Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Volta"
+        ```
+        最後に「環境変数を編集」を開き、ユーザー環境変数とシステム環境変数の `Path` に `Volta` を含む行が残っていれば削除してください。`VOLTA_HOME` という変数が残っていればそれも削除します。
+
+    3. ターミナル（VS Codeの統合ターミナルも含む）をすべて閉じてから開き直し、`volta --version` がコマンドが見つからないエラーになることを確認してください。まだバージョンが表示される場合は、手順2の `which -a volta` / `Get-Command volta -All` で表示された場所に本体が残っています。`node -v` が `mise.toml` の値と一致すれば完了です。
 - 画面が真っ白 / 古いページが表示される → `.next` を消してから `pnpm dev` をやり直してください（macOS/Linux: `rm -rf .next` / Windows: `Remove-Item -Recurse -Force .next`）。
 - それでも解決しない場合は `node_modules` ごと消して `pnpm install` からやり直してください。
